@@ -1,6 +1,4 @@
-﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
-Shader "Playground/SolidColor" {
+﻿Shader "Playground/SolidColor" {
 
 	Properties
 	{
@@ -9,36 +7,33 @@ Shader "Playground/SolidColor" {
 	}
 
 		SubShader{
-			Tags{ "Queue" = "Transparent" }
-			Pass
-			{
-				CGPROGRAM
-	
-				#pragma vertex vert             
-				#pragma fragment frag
+		Pass
+		{
+		CGPROGRAM
 
-				half4 _Color;
+		#pragma vertex vert             
+		#pragma fragment frag
 
-				struct vertInput {
-					float4 pos : POSITION;
-				};
+		half4 _Color;
 
-				struct vertOutput {
-					float4 pos : SV_POSITION;
-				};
+		struct vertInput {
+			float4 pos : POSITION;
+		};
 
-				
+		struct vertOutput {
+			float4 pos : SV_POSITION;
+		};
 
-				vertOutput vert(vertInput input) {
-					vertOutput o;
-					o.pos = UnityObjectToClipPos(input.pos);
-					return o;
-				}
-
-				half4 frag(vertOutput output) : COLOR{
-					return _Color;
-				}
-				ENDCG
+		vertOutput vert(vertInput input) {
+			vertOutput o;
+			o.pos = UnityObjectToClipPos(input.pos);
+			return o;
 		}
+
+		half4 frag(vertOutput output) : COLOR{
+			return _Color;
+		}
+		ENDCG	
+	}
 	}
 }
